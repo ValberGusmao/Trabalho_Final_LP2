@@ -20,8 +20,8 @@ public class SolicitacaoEventual extends Solicitacao{
             this.dataFim = sdf.parse(dataFim);;
         } catch (ParseException e) {
             System.out.println(e.getMessage());
+            throw new IllegalArgumentException("As datas estão num formato Inválido");
         }
-
     }
 
     public String getFinalidade() {

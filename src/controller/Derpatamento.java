@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Hashtable;
 
+//Principal Classe do Programa
 public class Derpatamento {
     private ArrayList<EspacoFisico> espacos;
     private SalvarDados salvar;
@@ -33,7 +34,7 @@ public class Derpatamento {
         return false;
     }
 
-    public void RelatorioPorEspaco(){
+    public void relatorioPorEspaco(){
         for (EspacoFisico esp: espacos){
             System.out.println("\n|"+esp+"|");
             for (ArrayList<Horario> h : esp.getSolicitacoes().keySet()){
@@ -41,13 +42,13 @@ public class Derpatamento {
             }
         }
     }
-    public void RelatorioPorCurso(){
+    public void relatorioPorCurso(){
         Hashtable<String, ArrayList<Solicitacao>> hash = new Hashtable<>();
         for (EspacoFisico esp: espacos) {
             for (ArrayList<Horario> h: esp.getSolicitacoes().keySet()){
                 Solicitacao sol = esp.getSolicitacoes().get(h);
                 if(!hash.containsKey(sol.getCurso().getNome())){
-                    hash.put(sol.getCurso().getNome(), new ArrayList<Solicitacao>());
+                    hash.put(sol.getCurso().getNome(), new ArrayList<>());
                 }
                 hash.get(sol.getCurso().getNome()).add(sol);
             }
@@ -109,7 +110,7 @@ public class Derpatamento {
                         // data de inicio do Evento entra em conflito com outo evento;
                         Solicitacao sol = esp.getSolicitacoes().get(h);
                         if (sol instanceof SolicitacaoEventual){
-                            SolicitacaoEventual solEvent = (SolicitacaoEventual) esp.getSolicitacoes().get(h);
+                            SolicitacaoEventual solEvent = (SolicitacaoEventual) sol;
 
                             // Se a data da nova solicitação não está no intervalo de outro evento, o horario dessa solicitação
                             // não interferi na escolha do espaço.
@@ -162,12 +163,12 @@ public class Derpatamento {
                     return adicionarSolicitacao(soli)!=null;
                 }
                 else if(tipoSoli.equals("EVENTUAL")){
-                    if (item.length >= 8) {
+                    if (item.length >= 9) {
                         SolicitacaoEventual soli = new SolicitacaoEventual(ano,semestre,curso,quantVagas,horario,dado, item[7], item[8]);
                         return adicionarSolicitacao(soli)!=null;
                     }
                 }
-        }
+            }
         }catch (IllegalArgumentException e){
             System.out.println(e);
             System.out.println("Essa linha Não foi reconhecida como uma entrada válida: " + linha);
@@ -177,5 +178,9 @@ public class Derpatamento {
 
     public ArrayList<EspacoFisico> getEspacos() {
         return espacos;
+    }
+
+    public SalvarDados getSalvar() {
+        return salvar;
     }
 }

@@ -18,12 +18,6 @@ public class EspacoFisico implements Serializable, Comparable {
         this.solicitacoes = new Hashtable<>();
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        EspacoFisico esp = (EspacoFisico) obj;
-        return (esp.getNome().equals(nome)) && (esp.getLocalizacao().equals(localizacao));
-    }
-
     public int getCapacidade() {
         return capacidade;
     }
@@ -37,10 +31,14 @@ public class EspacoFisico implements Serializable, Comparable {
     public Hashtable<ArrayList<Horario>, Solicitacao> getSolicitacoes() {
         return solicitacoes;
     }
-
+    @Override
+    public boolean equals(Object obj) {
+        EspacoFisico esp = (EspacoFisico) obj;
+        return (esp.getNome().equals(nome)) && (esp.getLocalizacao().equals(localizacao));
+    }
     @Override
     public String toString() {
-        return nome+"-"+localizacao;
+        return getClass().getName().substring(6)+" - "+nome+" - "+localizacao;
     }
 
     @Override

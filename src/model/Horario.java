@@ -53,7 +53,7 @@ public class Horario implements Serializable, Comparable {
             Collections.sort(retorno);
             return retorno;
         }
-        return null;
+        throw new IllegalArgumentException("Essa entrada não é um Horário válido");
     }
     public static boolean estaEmConflito(ArrayList<Horario> h1, ArrayList<Horario> h2){
         try {
